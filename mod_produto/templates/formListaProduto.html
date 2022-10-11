@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Produto</title>
-</head>
+{% extends "base.html" %}
 
-<body>
-    <h1>Rota da página de Produto da nossa WEB APP</h1>
-    <h1>Uso de render_template</h1>
-</body>
+{% block title %}Produto{% endblock %}
 
-</html>
+{% block titleH1 %}<h1>Produto</h1>{% endblock %}
+
+{% block content %}
+    <p class="important">Seja bem vindo!</p>
+    <h4>Menu do Produto, todos felizes :)</h4>
+{% endblock %}

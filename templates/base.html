@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.2.2-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-6.2.0-web/css/all.min.css') }}">
+    
+    <title>{% block title %}{% endblock %} - Xauxixa</title>
+
+    {% block style %}{% endblock %}
+    <style>
+        * {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    {% block menu %}
+    <div class="container">
+        <header class="d-flex justify-content-center py-3">
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{{ url_for('index.formListaIndex') }}" class="nav-link text-dark" aria-current="page"><h4>Home</h4></a></li>
+            <li class="nav-item"><a href="{{ url_for('funcionario.formListaFuncionario') }}" class="nav-link text-dark"><h4>Funcionários</h4></a></li>
+            <li class="nav-item"><a href="{{ url_for('cliente.formListaCliente') }}" class="nav-link text-dark"><h4>Clientes</h4></a></li>
+            <li class="nav-item"><a href="{{ url_for('produto.formListaProduto') }}" class="nav-link text-dark "><h4>Produtos</h4></a></li>
+          </ul>
+        </header>
+    </div>
+    {% endblock %}
+    
+    {% block titleH1 %}{% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block footer %}
+    &copy; Copyright 2022 by <a href="http://127.0.0.1:5000/">AbcBolinhas</a>.
+    {% endblock %}
+
+    {% block js %}{% endblock %}
+    
+    
+    <script src="{{ url_for('static', filename='bootstrap-5.2.2-dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='fontawesome-free-6.2.0-web/js/all.js') }}"></script>
+</body>
+
+</html>

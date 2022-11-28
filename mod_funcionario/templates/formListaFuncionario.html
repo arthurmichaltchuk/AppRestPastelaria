@@ -5,58 +5,46 @@
 {% block titleH1 %}<h1>Funcionário</h1>{% endblock %}
 
 {% block content %}
+
+<!-- {{ result }} -->
+
 <div class="container">
     <form action="{{ url_for('funcionario.formFuncionario') }}" method="POST">
         <button type="submit" class="btn btn-primary">Novo Funcionário</button>
     </form>
     <br>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Matricula</th>
-            <th scope="col">CPF</th>
-            <th scope="col">Telefone</th>
-            <th scope="col">Grupo</th>
-            <th scope="col">Senha</th>
-        </tr>
+    <table class="table table-striped table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Matricula</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Grupo</th>
+                <th scope="col">Senha</th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>123123</td>
-            <td>09909909900</td>
-            <td>(49)999199919</td>
-            <td>G1</td>
-            <td>*********</td>
-            <td><i class="fas fa-edit"></i></td>
-            <td><i class="fas fa-trash"></i></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>123123</td>
-            <td>09909909900</td>
-            <td>(49)999199919</td>
-            <td>G1</td>
-            <td>*********</td>
-            <td><i class="fas fa-edit"></i></td>
-            <td><i class="fas fa-trash"></i></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>123123</td>
-            <td>09909909900</td>
-            <td>(49)999199919</td>
-            <td>G1</td>
-            <td>*********</td>
-            <td><i class="fas fa-edit"></i></td>
-            <td><i class="fas fa-trash"></i></td>
-        </tr>
+            {% if result %}
+            {% for row in result[0] %}
+            <tr>
+                <th scope="row"> {{ row['id_funcionario'] }}</th>
+                <td> {{ row['nome'] }}</td>
+                <td> {{ row['matricula'] }}</td>
+                <td> {{ row['cpf'] }}</td>
+                <td> {{ row['telefone'] }}</td>
+                <td> {{ row['grupo'] }}</td>
+                <td> {{ row['senha'] }}</td>
+                <td><i class="fas fa-edit"></i></td>
+                <td><i class="fas fa-trash"></i></td>
+            </tr>
+            {% endfor %}
+            {% endif %}
         </tbody>
-    </table>
+    </table>    
 </div>
+
+
+
 {% endblock %}

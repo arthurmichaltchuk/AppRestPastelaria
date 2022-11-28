@@ -17,6 +17,9 @@
             </div>
         </div>
     </div>
+    {% if 'login' in session %}
+        Bem-vindo <b>{{ session['login'] }}</b>
+    {% endif %}
     <p class="important">Seja bem vindo!</p>
     <h4>Menu do Home, todos felizes :)</h4>
 {% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block menu %}
+
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#"><h2 class="text-white pd-3">Login</h2></a>
+    </div>        
+</nav>
+
+
+{% endblock %}
+
+{% block content %}
+<form action="{{ url_for('login.validaLogin') }}" method="post">
+    <br>
+    <div class="col-12">
+        <input class="text-center" placeholder="CPF" name="usuario" type="text" value="abc">
+    </div>
+    <br>
+    <input class="text-center" placeholder="Senha" name="senha" type="password" value="Bolinhas">
+    <br>
+    <hr>
+    <input class="btn btn-primary" type="submit" value="Login">
+    <br>
+</form>
+{% endblock %}

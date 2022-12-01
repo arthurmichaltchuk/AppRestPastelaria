@@ -13,6 +13,7 @@ headers = {'x-token': 'abcBolinhasToken', 'x-key': 'abcBolinhasKey'}
 
 ''' rotas '''
 @bp_funcionario.route('/', methods=['GET', 'POST'])
+@validaSessao
 def formListaFuncionario():
     response = requests.get(urlApiFuncionarios, headers=headers)
     result = response.json()
@@ -24,6 +25,7 @@ def formFuncionario():
     return render_template('formFuncionario.html')
 
 @bp_funcionario.route('/insert', methods=['POST'])
+@validaSessao
 def insert():
     try:
         # dados enviados via FORM

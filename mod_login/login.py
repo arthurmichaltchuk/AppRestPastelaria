@@ -1,8 +1,16 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from funcoes import Funcoes
 from functools import wraps
+import requests
+
+urlApiFuncionarios = "http://localhost:8000/funcionario/"
+urlApiFuncionario = "http://localhost:8000/funcionario/%s"
+headers = {'x-token': 'abcBolinhasToken', 'x-key': 'abcBolinhasKey'}
 
 bp_login = Blueprint('login', __name__, url_prefix='/', template_folder='templates')
+
+headers = {'x-token': 'abcBolinhasToken', 'x-key': 'abcBolinhasKey'}
+url_login = "http://localhost:8000/login/"
 
 @bp_login.route("/", methods=['GET', 'POST'])
 def login():
@@ -15,18 +23,32 @@ def validaLogin():
         cpf = request.form['usuario']
         senha = Funcoes.cifraSenha(request.form['senha'])
 
+        payload = {
+            'cpf': cpf,
+            'senha': senha
+        }
+        print('dedeA')
+        print(senha)
+
         # limpa a sessão
         session.clear()
 
-        if (cpf == "abc" and senha == Funcoes.cifraSenha('Bolinhas') or cpf == "123" and senha == Funcoes.cifraSenha('123')):
-            # registra usuário na sessão, armazenando o login do usuário
-            session['login'] = cpf
-            # abre a aplicação na tela home
+        login = requests.post(url_login, headers=headers, params=payload)
+
+        result = login.json()
+
+        if (result[0] == 1):
+            usuario = result[1]
+
+            session['login'] = usuario['nome']
+            session['usuario'] = usuario
+
+            print(usuario)
             return redirect(url_for('index.formIndex'))
         else:
-            raise Exception("Falha de Login! Verifique seus dados e tente novamente!")
+            raise Exception(
+                "Falha de Login! Verifique seus dados e tente novamente!")
     except Exception as e:
-        # retorna para a tela de login
         return redirect(url_for('login.login', msgErro=e.args[0]))
 
 @bp_login.route("/logoff", methods=['GET'])
